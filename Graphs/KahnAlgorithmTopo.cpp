@@ -42,4 +42,9 @@ int main(){
     vector<int> ans;
     ans=kahn(adjList,vertices,InDex); 
     for(int i=0;i<ans.size();++i){cout<<ans[i]+1<<" ";}cout<<endl;
+	
+   /* if(ans.size()!=vertices){cout<<"cycle detected"<<endl;}
+    else {cout<<"no cycle"<<endl;}   This piece of code can be altered in the form of a counter variable in the BFS and may be used in the 
+	cycle detection use-case*/
+	
 }
