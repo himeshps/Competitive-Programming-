@@ -1,72 +1,51 @@
-#include<bits/stdc++.h>
-using namespace std;
+// this is my new implementation as the last one's internals were purely shitty as fck. 
 
-// The class of disjoint set to be used in the template.
-
-class DisjointSet{
-    vector<int> rank,parent,size;
+class UnionFind
+{
+private:
+    vector<int> par;                // parent
+    vector<int> sz;                 // size
+ 
 public:
-    DisjointSet(int n){                                  //Constructor Definition.
-        rank.resize(n+1,0);
-        parent.resize(n+1);
-        size.resize(n+1);
-        for(int i=0;i<=n;++i){
-            parent[i]=i;
-            size[i]=1;
-        }
+    UnionFind(int n)                    // using this OG constructor shit !!
+    {
+        par = vector<int>(n);
+        iota(par.begin(), par.end(), 0);
+        sz = vector<int>(n, 1);
     }
-
-    int findUPar(int node){                             // Ultimate Parent Functionality.
-        if(node==parent[node]){
-            return node;
-        }
-        return parent[node]= findUPar(parent[node]); 
+ 
+    int find(int u)                       // ultimate ancestor matching functionality .
+    {
+        if (par[u] != par[par[u]])
+            par[u] = find(par[par[u]]);
+        return par[u];
     }
-
-    void unionByRank(int u,int v){                       // Union By Rank Functionality.
-        int ulp_u=findUPar(u);
-        int ulp_v=findUPar(v);
-        if(ulp_v==ulp_u){ return;
-        }
-        if(rank[ulp_u]<rank[ulp_v]){
-            parent[ulp_u]=ulp_v;
-        }
-        else if(rank[ulp_v]<rank[ulp_u]){
-            parent[ulp_v]=ulp_u;
-        }
-        else{
-            parent[ulp_v]=ulp_u;
-            rank[ulp_u]++;
-        }
-    }
-
-void unionBySize(int u, int v){                           // Union By Size Functionality.
-        int ulp_u=findUPar(u);
-        int ulp_v=findUPar(v);
-        if(ulp_v==ulp_u) return;
-        else if(size[ulp_u] < size[ulp_v]){
-            parent[ulp_u]=ulp_v;
-            size[ulp_v]+=size[ulp_u];
-        }
-        else{
-            parent[ulp_v]=ulp_u;
-            size[ulp_u]+=size[ulp_v];
-        }
-    }
-
-bool checkSet(int u, int v){                                 // made the inbuilt check for same set check in the class definition itself. 
-        if(findUPar(u)==findUPar(v)) return true;
-
+ 
+    bool connected(int u, int v)         // the boolean returns a check if the given arguements to it are connected or not. 
+    {
+        u = find(u);
+        v = find(v);
+        if (u == v)
+            return true;
         return false;
     }
-
+ 
+    bool join(int u, int v)              // an important dude in the code, it combines the nodes into one segment . 
+    {
+        u = find(u);
+        v = find(v);
+        if (u == v)
+            return false;
+        if (sz[u] <= sz[v])
+        {
+            sz[v] += sz[u];
+            par[u] = v;
+        }
+        else
+        {
+            sz[u] += sz[v];
+            par[v] = u;
+        }
+        return true;
+    }
 };
-
-// the following part would go inside the main function.
-
-DisjointSet ds(Structure_size); // defining the structure along with the size and its name
-// ds.unionByRank(node1,node2); for combining node 1 and node 2 into the same set based on rank.
-// ds.unionBySize(node1,node2); for combining node 1 and node 2 into the same set based on size.
-
-// to check if 2 nodes belong to the same set 
-bool val=ds.checkSet(node1 , node2);
