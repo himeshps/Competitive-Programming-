@@ -8,18 +8,26 @@ using namespace std;
 #define ll long long
 #define lb lower_bound
 #define ub upper_bound
-#define fo(i,a,b) for(i=a;i<=b;i++)
+#define rep(i, n) for (ll i = 0; i < n; i++)
 #define all(x) (x).begin(),(x).end()
 #define pb push_back
 #define inp(a,n) vector <int> a(n); for(int i=0;i<n;i++) cin >> a[i];
+#define give(a,n) rep(i,n)cout<<a[i]<<" "
 
 typedef vector<int> vi;
 typedef vector<long long> vll;
 typedef pair<int,int> pii;
 typedef map< long long , long long > mll;
-typedef vector< vector< long long >> vvll;
+typedef vector< vector< long long >> vvl;
+
+vector<pair<int , int>> moves = { { 1 , 0 } , { -1 , 0 } , { 0 , -1 } , { 0 , 1 } } ;   
 
 const long long mod=1e9 + 7;
+
+void yesno(bool flag) {
+    if (flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
+}
 
 string base_rep(ll n, ll b){  
     if(n==0) return "0";
