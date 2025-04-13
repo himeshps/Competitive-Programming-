@@ -60,7 +60,7 @@ int gcdExtended(int a, int b, int *x, int *y) {
     return gcd; 
 } 
 
-bool isValid( ll i , ll j){
+bool isValid( ll n , ll m , ll i , ll j){
   if( i >= 0 && j >= 0 && i < n && j < m ) return true ;
   return false;
 }
