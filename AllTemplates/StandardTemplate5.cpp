@@ -20,6 +20,8 @@ typedef pair<int,int> pii;
 typedef map< long long , long long > mll;
 typedef vector< vector< long long >> vvl;
 
+const long long MOD = 1e9 + 7;
+
 ll gcdEx                    (ll a, ll b, ll *x, ll *y){if(!a){*x=0;*y=1;return b;} 
 ll x1,y1,gcd=gcdEx          (b%a,a,&x1,&y1); *x=y1-(b/a)*x1;*y=x1; return gcd;}
 ll modI(ll b, ll m)         {ll x,y;gcdEx(b,m,&x,&y);return (x%m+m)%m;}
@@ -30,8 +32,6 @@ ll modA(ll a, ll b)         {return ((a%MOD)+(b%MOD))%MOD;}
 ll modM(ll a, ll b)         {return ((a%MOD)*(b%MOD))%MOD;}
 
 vector<pair<int , int>> moves = { { 1 , 0 } , { -1 , 0 } , { 0 , -1 } , { 0 , 1 } } ;   
-
-const long long mod=1e9 + 7;
 
 void yesno(bool flag) {
     if (flag) cout << "YES" << endl;
