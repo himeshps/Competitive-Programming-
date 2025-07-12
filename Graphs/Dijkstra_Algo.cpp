@@ -10,19 +10,19 @@ vector<int> dijkstra( int n , vector<vector<int>>& adjList , int source) {
     vector<int> dist(n , 1e9);
 
     dist[source] = 0 ;
-    pq.push({ 0 ,source }) ;
+    pq.push({ 0 , source }) ;
 
     while( !pq.empty() ){
-        int dis = pq.top().first ;
-        int node = pq.top().second ;
+        auto [dis , node] = pq.top(); 
         pq.pop(); 
-
+        if(dis > dist[node]) continue; 
+        
         for( auto it : adj[node]) {
             int edgeW = it[i] ;
             int adjN = it[0] ;
-
-            if( dis + edgeW < dist[adjNode]){
-                dist[adjNode] = dis + edgeW;
+            
+            if( dis + edgeW < dist[adjN]){
+                dist[adjN] = dis + edgeW;
                 pq.push( {dist[adjN] , adjN} ) ;
             }
         }
